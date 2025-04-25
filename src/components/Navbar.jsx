@@ -22,13 +22,20 @@ const Navbar = ({ scrollRefs }) => {
       <div className="container px-4 mx-auto relative text-sm">
         <div className="flex justify-between items-center">
           <div className="flex items-center flex-shrink-0">
-            <img className="h-10 w-10 mr-2" src={logo} alt="logo" />
-            <span className="text-xl tracking-tight">VirtualR</span>
+            <a href="#">
+              <img className="h-10 w-10 mr-2" src={logo} alt="logo" />
+            </a>
+            <span className="text-xl tracking-tight">
+              <a href="#">VirtualR</a>
+            </span>
           </div>
           <ul className="hidden lg:flex ml-14 space-x-12">
             {navItems.map((item, index) => (
               <li key={index}>
-                <button className="cursor-pointer" onClick={() => handleScroll(scrollRefs[item.href])}>
+                <button
+                  className="cursor-pointer"
+                  onClick={() => handleScroll(scrollRefs[item.href])}
+                >
                   {item.label}
                 </button>
               </li>
@@ -46,7 +53,7 @@ const Navbar = ({ scrollRefs }) => {
             </a>
           </div>
           <div className="lg:hidden md:flex flex-col justify-end">
-            <button onClick={toggleNavbar}>
+            <button className="cursor-pointer" onClick={toggleNavbar}>
               {mobileDrawerOpen ? <X /> : <Menu />}
             </button>
           </div>
@@ -57,7 +64,10 @@ const Navbar = ({ scrollRefs }) => {
             <ul>
               {navItems.map((item, index) => (
                 <li key={index} className="py-4">
-                  <button className="cursor-pointer" onClick={() => handleScroll(scrollRefs[item.href])}>
+                  <button
+                    className="cursor-pointer"
+                    onClick={() => handleScroll(scrollRefs[item.href])}
+                  >
                     {item.label}
                   </button>
                 </li>
