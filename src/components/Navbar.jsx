@@ -3,11 +3,18 @@ import { useState } from "react";
 import logo from "../assets/logo.png";
 import { navItems } from "../constants";
 
-const Navbar = () => {
+const Navbar = ({ scrollRefs }) => {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
 
   const toggleNavbar = () => {
     setMobileDrawerOpen(!mobileDrawerOpen);
+  };
+
+  const handleScroll = (ref) => {
+    if (ref?.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+      setMobileDrawerOpen(false); // Close drawer on mobile
+    }
   };
 
   return (
@@ -21,7 +28,9 @@ const Navbar = () => {
           <ul className="hidden lg:flex ml-14 space-x-12">
             {navItems.map((item, index) => (
               <li key={index}>
-                <a href={item.href}>{item.label}</a>
+                <button className="cursor-pointer" onClick={() => handleScroll(scrollRefs[item.href])}>
+                  {item.label}
+                </button>
               </li>
             ))}
           </ul>
@@ -42,12 +51,15 @@ const Navbar = () => {
             </button>
           </div>
         </div>
+
         {mobileDrawerOpen && (
           <div className="fixed right-0 z-20 bg-neutral-900 w-full p-12 flex flex-col justify-center items-center lg:hidden">
             <ul>
               {navItems.map((item, index) => (
                 <li key={index} className="py-4">
-                  <a href={item.href}>{item.label}</a>
+                  <button className="cursor-pointer" onClick={() => handleScroll(scrollRefs[item.href])}>
+                    {item.label}
+                  </button>
                 </li>
               ))}
             </ul>
